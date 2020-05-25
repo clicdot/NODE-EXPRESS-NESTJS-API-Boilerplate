@@ -24,6 +24,16 @@ export async function createApp(): Promise<INestApplication> {
   // app.useGlobalInterceptors(new ErrorsInterceptor());
   app.useGlobalInterceptors(new TransformInterceptor());
 
+  // Swagger Docs
+  const options = new DocumentBuilder()
+    .setTitle('Swagger example')
+    .setDescription('The SpSwaggeracee API description')
+    .setVersion('1.0')
+    .addTag('Swagger')
+    .build();
+  const document = SwaggerModule.createDocument(app, options);
+  SwaggerModule.setup('swagger', app, document);
+
   await app.init();
   return app;
 }
